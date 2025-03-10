@@ -102,15 +102,15 @@ def result(image_path, colors, number_of_parts):
         w = width // n
         h = height // n
 
-        new_image.paste(img.resize((w, h)), (((i % n) * w, (i // n) * h)))
-    new_image.save("result.jpg")
+        new_image.paste(img.resize((w, h)), ((i % n) * w, (i // n) * h))
+    new_image.save("result.png")
     new_image.show()
     return new_image
 
 
 image_path = ('kartinka_po_nomeram/test.jpg')
-rows = 10
-cols = 10
+rows = 35
+cols = 35
 result(image_path, get_average_colors(image_path, rows, cols), rows * cols)
 #  for i in split_image(image_path, rows, cols):
 #      i.show()
