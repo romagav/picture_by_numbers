@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageOps
 import numpy as np
 
 
@@ -97,18 +97,20 @@ def result(image_path, colors, number_of_parts):
     new_image = Image.new('RGB', (width, height), (0, 0, 0))
     for i in range(number_of_parts):
         img = Image.open(f"kartinka_po_nomeram/{colors[i]}.jpg")
+        img = ImageOps.expand(img, border=10, fill='black')
         n = int(number_of_parts ** 0.5)
         w = width // n
         h = height // n
 
         new_image.paste(img.resize((w, h)), (((i % n) * w, (i // n) * h)))
-    new_image.save("kartinka_po_nomeram/result.jpg")
+    new_image.save("result.jpg")
+    new_image.show()
     return new_image
 
 
 image_path = ('kartinka_po_nomeram/test.jpg')
-rows = 15
-cols = 15
+rows = 10
+cols = 10
 result(image_path, get_average_colors(image_path, rows, cols), rows * cols)
 #  for i in split_image(image_path, rows, cols):
 #      i.show()
