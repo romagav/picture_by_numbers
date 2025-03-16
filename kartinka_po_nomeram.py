@@ -93,6 +93,8 @@ def get_average_colors(image_path, rows, cols):
 
 def result(image_path, colors, number_of_parts):
     image = Image.open(image_path)
+    image = ImageOps.autocontrast(image, cutoff=40)
+    image.show()
     width, height = image.size
     new_image = Image.new('RGB', (width, height), (0, 0, 0))
     for i in range(number_of_parts):
